@@ -12,6 +12,14 @@ import com.minhalojadegames.lojaGame.repository.CategoriaRepository;
 public class CategoriaService {
 	private @Autowired CategoriaRepository repository;
 	
+	/**
+	 * Método criado para verificar se existe o elemento a ser alterado. 
+	 * @param id
+	 * @param descricao
+	 * @return Um optiona caso exista ou optional vazio caso contrátio.
+	 * @since V.1.0
+	 * @author Nathalia Favero
+	 */
 	public Optional<Categoria> putCategoria(Long id, Categoria descricao){
 		Optional<Categoria> categoriaAntiga = repository.findById(id);
 		
@@ -24,6 +32,13 @@ public class CategoriaService {
 		}
 	}
 	
+	/**
+	 * Verifica se o elemento a ser cadastrado existe no sistema.
+	 * @param descricao
+	 * @return Um optional vazio caso exista ou um optional.
+	 * @since V.1.0
+	 * @author Nathalia Favero
+	 */
 	public Optional<Categoria> salvarCategoria(Categoria descricao){
 		Optional<Categoria> categoria = repository.findByDescricao(descricao.getDescricao());
 		if (categoria.isPresent()) {

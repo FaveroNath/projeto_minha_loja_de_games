@@ -13,6 +13,13 @@ public class ProdutoService {
 
 	private @Autowired ProdutoRepository repository;
 	
+	/**
+	 * Verifica se o produto já existe antes de salva-lo.
+	 * @param produto
+	 * @return Um optional vazio caso exista.
+	 * @since V.1.0
+	 * @author Nathalia Favero
+	 */
 	public Optional<Object> salvarProduto(Produto produto){
 		Optional<Produto> produtos = repository.findByTitulo(produto.getTitulo());
 		if (produtos.isPresent()) {
@@ -21,6 +28,14 @@ public class ProdutoService {
 		return Optional.ofNullable(repository.save(produto));
 	}
 	
+	/**
+	 * Verifica se o produto a ser alterado já existe no sistema.
+	 * @param id
+	 * @param produto
+	 * @return Um optional vazio caso não exista.
+	 * @since V.1.0
+	 * @author Nathalia Favero
+	 */
 	public Optional<Object> alterarProduto(long id, Produto produto){
 		Optional<Produto> produtoExistente = repository.findById(id);
 		if (produtoExistente.isPresent()) {
